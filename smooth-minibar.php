@@ -144,6 +144,12 @@ class Smooth_Minibar {
 	 * @return strong $minibar_markup
 	 */
 	public function get_minibar() {
+		global $pagenow;
+		
+		$pages = array( 'post.php', 'post-new.php', 'comment.php', 'edit-comments.php', 'edit.php', 'edit-tags.php' );
+		
+		if ( !in_array( $pagenow, $pages ) )
+			return NULL;
 		
 		$defaults_select = array (
 			'h3' => array( 
