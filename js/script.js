@@ -15,7 +15,7 @@ jQuery(document).ready( function ($) {
 		mouseY = e.pageY;
 	});
 	// hide on mousedown
-	$(element).mousedown(function() {
+	$(element +', body').mousedown(function() {
 		
 		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
 	});
