@@ -9,16 +9,6 @@ jQuery(document).ready( function ($) {
 	var now = now || new Date(),
 		datetime = ISODateString(now);
 	
-	// ein versuch ???
-	var minibarButtons = new Array();
-	
-	function minibarButtons(type, id, tagStart, tagEnd) {
-		this.type = type;			// type of buttton for different line; default or popup
-		this.id = id;				// used to name the toolbar button
-		this.tagStart = tagStart;	// open tag
-		this.tagEnd = tagEnd;		// close tag
-	}
-	
 	$(element).mousemove(function(e) {
 		// track mouse position
 		mouseX = e.pageX;
@@ -132,27 +122,6 @@ jQuery(document).ready( function ($) {
 		wrapText("<!--nextpage-->", "");
 		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
 	});
-	
-	// ein versuch ???
-	function minibar_functions(button) {
-		if ( button.type == 'default' || button.type == '' ) {
-			// default
-			$(button.id).click(function() {
-				wrapText( button.tagStart, button.tagEnd );
-				$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
-			});
-		}
-		else if (button.type == 'popup') {
-			// ToDo
-			$(button.id).click(function() {
-				var url = prompt("Enter the URL of the image", "http://");
-				var alt = prompt("Enter a description of the image", "");
-				wrapText( button.tagStart, button.tagEnd );
-				$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
-			});
-			
-		}
-	}
 	
 	function wrapText(startText, endText){
 		// Get the text before the selection
