@@ -1,0 +1,31 @@
+#smooth_minibar_menu, #smooth_minibar_menu_noselect {
+padding: 5px;
+background-color: #DFDFDF; background-color: rgba(223, 223, 223, 0.6);
+display: none;
+position: absolute; top: 0; left: 0;
+overflow:hidden;
+border:solid 1px #DFDFDF;
+border-radius: 6px; -moz-border-radius: 6px;  -khtml-border-radius: 6px; -webit-border-radius: 6px; 
+box-shadow: 3px 3px 20px #888; -moz-box-shadow: 3px 3px 20px #555; -webkit-box-shadow: 3px 3px 20px #888;
+}
+#smooth_minibar_menu:hover, #smooth_minibar_menu_noselect:hover {
+background-color:rgba(223, 223, 223, 1);
+}
+#smooth_minibar_menu a, #smooth_minibar_menu_noselect a {
+padding: 3px 5px;
+margin: 3px 1px 4px;
+border: solid 1px #C3C3C3;
+background: #fff url("../../../../wp-admin/images/fade-butt.png") repeat-x 0 -2px;
+color: #000;
+text-decoration: none; 
+font-size: 12px;
+float: left; 
+display: block; 
+text-align: center;
+border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; -webkit-border-radius: 4px;
+}
+#smooth_minibar_menu a:hover, #smooth_minibar_menu_noselect a:hover {
+border: solid 1px #aaa;
+background: #ddd;
+border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; -webkit-border-radius: 4px;
+}
