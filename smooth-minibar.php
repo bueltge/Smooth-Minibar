@@ -58,7 +58,7 @@ class Smooth_Minibar {
 	 */
 	public function enqueue_script($pagehook) {
 		
-		if ( defined('WP_DEBUG') && WP_DEBUG )
+		if ( defined('WP_DEBUG') && WP_DEBUG && isset($_GET['debug']) && $_GET['debug'] === 'true' )
 			echo '<br><br>Pagehook: <code>' . $pagehook . '</code>';
 		
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
