@@ -175,7 +175,7 @@ class Smooth_Minibar {
 		$defaults_select = array (
 			'h3' => array( 
 				'name'			=> 'h3',
-				'title'			=> __( 'Heading' ),
+				'title'			=> __( 'Heading', &$this->textdomain ),
 				'data-minibar' 	=> array(
 					'wrapTextBefore'	=> '<h3>',
 					'wrapTextAfter'		=> '</h3>'
