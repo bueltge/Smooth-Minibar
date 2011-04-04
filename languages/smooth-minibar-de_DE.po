@@ -1,0 +1,117 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: \n"
+"X-Poedit-Country: \n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: smooth-minibar.php:178
+#: smooth-minibar.php:186
+#@ smooth-minibar
+msgid "Heading"
+msgstr "Überschrift"
+
+#: smooth-minibar.php:194
+#@ smooth-minibar
+msgid "Strong"
+msgstr "Stark"
+
+#: smooth-minibar.php:202
+#@ smooth-minibar
+msgid "Emphasized text"
+msgstr "Hervorgehobener Text"
+
+#: smooth-minibar.php:210
+#@ smooth-minibar
+msgid "Anchor or link"
+msgstr "Anker oder Link"
+
+#: smooth-minibar.php:215
+#@ smooth-minibar
+msgid "Enter the URL of the target"
+msgstr "Geben Sie die URL des Ziels ein"
+
+#: smooth-minibar.php:221
+#@ smooth-minibar
+msgid "Defines a long quotation"
+msgstr "Definiert ein langes Zitat"
+
+#: smooth-minibar.php:229
+#@ smooth-minibar
+msgid "Defines a citation"
+msgstr "Definiert ein Zitat"
+
+#: smooth-minibar.php:237
+#@ smooth-minibar
+msgid "Defines text that has been deleted from a document, with timestamp"
+msgstr "Definiert Text, der aus einem Dokument gelöscht wurde, mit Zeitstempel"
+
+#: smooth-minibar.php:245
+#@ smooth-minibar
+msgid "Defines text that has been inserted into a document, with timestamp"
+msgstr "Definiert Text der in ein Dokument eingefügt wurde, mit Zeitstempel"
+
+#: smooth-minibar.php:253
+#@ smooth-minibar
+msgid "unordered list"
+msgstr "ungeordnete Liste"
+
+#: smooth-minibar.php:261
+#@ smooth-minibar
+msgid "ordered list"
+msgstr "geordnete Liste"
+
+#: smooth-minibar.php:269
+#@ smooth-minibar
+msgid "list tag"
+msgstr "Liste Stichworte"
+
+#: smooth-minibar.php:277
+#@ smooth-minibar
+msgid "code phrase tag"
+msgstr "Code Auszeichnung"
+
+#: smooth-minibar.php:285
+#@ smooth-minibar
+msgid "preformatted text"
+msgstr "vorformatierter Text"
+
+#: smooth-minibar.php:296
+#@ smooth-minibar
+msgid "Insert a image"
+msgstr "Fügen Sie ein Bild ein"
+
+#: smooth-minibar.php:301
+#@ smooth-minibar
+msgid "Enter the URL of the image"
+msgstr "Geben Sie die URL des Bildes ein"
+
+#: smooth-minibar.php:302
+#@ smooth-minibar
+msgid "Enter a description of the image"
+msgstr "Geben Sie eine Beschreibung des Bildes ein"
+
+#: smooth-minibar.php:308
+#@ smooth-minibar
+msgid "Here you want to end the excerpted content"
+msgstr "Du setzt hier das Ende für den Auszug des Inhalts"
+
+#: smooth-minibar.php:316
+#@ smooth-minibar
+msgid "Split a single post up into different web pages"
+msgstr "Splitte einen einzigen Beitrag in verschiedene Web-Seiten"
+
