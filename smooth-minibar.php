@@ -51,6 +51,14 @@ class Smooth_Minibar {
 		add_action( 'admin_footer', array( $this, 'get_minibar' ) );
 	}
 	
+/**
+	 * load textfile .mo
+	 * 
+	 * @uses load_plugin_textdomain
+	 * @access public
+	 * @since 0.0.2
+	 * @return void
+	 */
 	public function loadtextdomain() {
 		
 		// load language file
