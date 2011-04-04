@@ -299,7 +299,7 @@ class Smooth_Minibar {
 					'wrapTextAfter' => '',
 					'attributes' => array(
 						'src' => __( 'Enter the URL of the image', &$this->textdomain ),
-						'alt' => __( 'Enter a description of the image, &$this->textdomain )'
+						'alt' => __( 'Enter a description of the image', &$this->textdomain )
 					)
 				)
 			),
@@ -341,7 +341,7 @@ class Smooth_Minibar {
 		foreach ( $buttons_dblclick as $id => $args ) {
 			$minibar_buttons_dblclick .= '<a 
 			href="javascript:return false;"
-			' . (isset($args['title']) ? ' title="' .$args['name'].'"' : '').'
+			' . (isset($args['title']) ? ' title="' . $args['name'] . '"' : '').'
 			' . (isset($args['data-minibar']) ? ' data-minibar=\'' .json_encode($args['data-minibar'],JSON_FORCE_OBJECT).'\'' : '').'
 			>' . (isset($args['name']) ? $args['name'] : '') . '</a>' . "\n";
 		}
