@@ -199,7 +199,7 @@ class Smooth_Minibar {
 			),
 			'italic' => array(
 				'name'			=> 'i',
-				'title'			=> _( 'Emphasized text', &$this->textdomain ),
+				'title'			=> __( 'Emphasized text', &$this->textdomain ),
 				'data-minibar' 	=> array(
 					'wrapTextBefore'	 => '<em>',
 					'wrapTextAfter'		 => '</em>'
