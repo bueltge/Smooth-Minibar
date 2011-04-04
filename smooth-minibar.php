@@ -5,8 +5,8 @@
 /*
 Plugin Name: Smooth Minibar
 Plugin URI: http://bueltge.de/
-Description: It is a variation of a toolbar that exposes context-related functionality.
-Version: 0.0.1
+Description: 
+Version: 0.0.2
 Author: Frank Bültge
 Author URI: http://bueltge.de/
 License: GPLv2
@@ -44,11 +44,10 @@ class Smooth_Minibar {
 		add_action( 'admin_print_styles',		array( $this, 'enqueue_style' ) );
 		
 		add_action( 'admin_footer', array( $this, 'get_minibar' ) );
-		
 	}
 	
 	/**
-	 * Enqueue scripts in WP
+	 * include scripts in WP backend
 	 * 
 	 * @uses wp_enqueue_script
 	 * @access public
@@ -57,9 +56,10 @@ class Smooth_Minibar {
 	 * @return void
 	 */
 	public function enqueue_script($pagehook) {
-		
-		if ( defined('WP_DEBUG') && WP_DEBUG && isset($_GET['debug']) && $_GET['debug'] === 'true' )
-			echo '<br><br>Pagehook: <code>' . $pagehook . '</code>';
+		// for echo current page
+		if ( defined('WP_DEBUG') && WP_DEBUG && 
+			isset( $_GET['debug'] ) && 'true' == $_GET['debug'] )
+			echo '<br /><br />Pagehook: <code>' . $pagehook . '</code>';
 		
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
 		
@@ -119,11 +119,12 @@ class Smooth_Minibar {
 	}
 	
 	/**
-	 * Enqueue style in WP
+	 * include styles in WP backend
 	 * 
-	 * @uses wp_enqueue_style
+	 * @uses $pagenow
 	 * @access public
 	 * @since 0.0.1
+	 * @param void
 	 * @return void
 	 */
 	public function enqueue_style() {
@@ -136,92 +137,164 @@ class Smooth_Minibar {
 	}
 	
 	/**
-	 * get html for buttons
-	 * use the filters smooth_minibar_select_buttons and smooth_minibar_dblclick_buttons for custom bottons
+	 * Echo minibar
+	 * use filter to add buttons, for buttons in the first toolbat, via mouse select, use smooth_minibar_select_buttons
+	 * for buttons with popup, the second toolbar use smooth_minibar_dblselect_buttons
 	 * 
+	 * @uses $pagenow
 	 * @access public
 	 * @since 0.0.1
-	 * @return strong $minibar_markup
+	 * @param void
+	 * @return string $minibar_markup
 	 */
 	public function get_minibar() {
-		global $pagenow;
-		
-		$pages = array( 'post.php', 'post-new.php', 'comment.php', 'edit-comments.php', 'edit.php', 'edit-tags.php' );
-		
-		if ( !in_array( $pagenow, $pages ) )
-			return NULL;
 		
 		$defaults_select = array (
 			'h3' => array( 
-				'name'	=> 'h3',
-				'title'	=> __( 'Heading' )
+				'name'			=> 'h3',
+				'title'			=> __( 'Heading' ),
+				'data-minibar' 	=> array(
+					'wrapTextBefore'	=> '<h3>',
+					'wrapTextAfter'		=> '</h3>'
+				)
 			),
 			'h4' => array( 
-				'name'	=> 'h4',
-				'title'	=> __( 'Heading' )
+				'name'			=> 'h4',
+				'title'			=> __( 'Heading' ),
+				'data-minibar' 	=> array(
+					'wrapTextBefore'	=> '<h4>',
+					'wrapTextAfter' 	=> '</h4>'
+				)
 			),
 			'bold' => array( 
-				'name'	=> 'b',
-				'title'	=> __( 'Strong' )
+				'name'			=> 'b',
+				'title'			=> __( 'Strong' ),
+				'data-minibar' 	=> array(
+					'wrapTextBefore'	 => '<strong>',
+					'wrapTextAfter'		 => '</strong>'
+				)
 			),
 			'italic' => array(
-				'name'	=> 'i',
-				'title'	=> 'Emphasized text'
+				'name'			=> 'i',
+				'title'			=> 'Emphasized text',
+				'data-minibar' 	=> array(
+					'wrapTextBefore'	 => '<em>',
+					'wrapTextAfter'		 => '</em>'
+				)
 			),
 			'link' => array(
-				'name'	=> 'a',
-				'title'	=> 'Anchor or link'
+				'name'			=> 'a',
+				'title'			=> 'Anchor or link',
+				'data-minibar' 	=> array(
+					'wrapTextBefore' 	=> '<a>',
+					'wrapTextAfter'	 	=> '</a>',
+					'attributes' 		=> array(
+						'href' => 'Enter the URL of the target'
+					)
+				)
 			),
 			'blockquote' => array(
-				'name'	=> 'b-quote',
-				'title'	=> 'Defines a long quotation'
+				'name'			=> 'b-quote',
+				'title'			=> 'Defines a long quotation',
+				'data-minibar' 	=> array(
+					'wrapTextBefore' 	=> '<blockquote>',
+					'wrapTextAfter' 	=> '</blockquote>'
+				)
 			),
 			'cite' => array(
-				'name'	=> 'q',
-				'title'	=> 'Defines a citation'
+				'name'			=> 'q',
+				'title'			=> 'Defines a citation',
+				'data-minibar' 	=> array(
+					'wrapTextBefore' 	=> '<cite>',
+					'wrapTextAfter' 	=> '</cite>'
+				)
 			),
 			'delete' => array(
-				'name'	=> 'del',
-				'title'	=> 'Defines text that has been deleted from a document, with timestamp'
+				'name'			=> 'del',
+				'title'			=> 'Defines text that has been deleted from a document, with timestamp',
+				'data-minibar' 	=> array(
+					'wrapTextBefore' 	=> '<del datetime="' . date("YmdTh:i:s+00:00") . '">',
+					'wrapTextAfter' 	=> '</del>'
+				)
 			),
 			'insert' => array(
-				'name'	=> 'ins',
-				'title'	=> 'Defines text that has been inserted into a document, with timestamp'
+				'name'			=> 'ins',
+				'title'			=> 'Defines text that has been inserted into a document, with timestamp',
+				'data-minibar' 	=> array(
+					'wrapTextBefore'	 => '<ins datetime="' . date("YmdTh:i:s+00:00") . '">',
+					'wrapTextAfter'		 => '</ins>'
+				)
 			),
 			'unorderedlist' => array(
-				'name'	=> 'ul',
-				'title'	=> 'unordered list'
+				'name'			=> 'ul',
+				'title'			=> 'unordered list',
+				'data-minibar' 	=> array(
+					'wrapTextBefore' 	=> '<ul>' . "\r\n",
+					'wrapTextAfter' 	=> "\r\n" . '</ul>'
+				)
 			),
 			'orderedlist' => array(
-				'name'	=> 'ol',
-				'title'	=> 'ordered list'
+				'name'			=> 'ol',
+				'title'			=> 'ordered list',
+				'data-minibar' 	=> array(
+					'wrapTextBefore' 	=> '<ol>' . "\r\n",
+					'wrapTextAfter' 	=> "\r\n" . '</ol>'
+				)
 			),
 			'list' => array(
-				'name'	=> 'li',
-				'title'	=> 'list tag'
+				'name'			=> 'li',
+				'title'			=> 'list tag',
+				'data-minibar' 	=> array(
+					'wrapTextBefore' 	=> "\r\n" . '<li>',
+					'wrapTextAfter' 	=> '</li>' . "\r\n"
+				)
 			),
 			'code' => array(
-				'name'	=> 'code',
-				'title'	=> 'code phrase tag'
+				'name'			=> 'code',
+				'title'			=> 'code phrase tag',
+				'data-minibar' 	=> array(
+					'wrapTextBefore' 	=> '<code>',
+					'wrapTextAfter' 	=> '</code>'
+				)
 			),
 			'pre' => array(
-				'name'	=> 'pre',
-				'title'	=> 'preformatted text'
+				'name'			=> 'pre',
+				'title'			=> 'preformatted text',
+				'data-minibar' 	=> array(
+					'wrapTextBefore' 	=> "\r\n" . '<pre>',
+					'wrapTextAfter' 	=> '</pre>' . "\r\n"
+				)
 			)
 		);
 		
 		$defaults_dblclick = array (
 			'img' => array( 
 				'name'	=> 'img',
-				'title'	=> __( 'Insert a image' )
+				'title'	=> __( 'Insert a image' ),
+				'data-minibar' 	=> array(
+					'wrapTextBefore' => '<img />',
+					'wrapTextAfter' => '',
+					'attributes' => array(
+						'src' => 'Enter the URL of the image',
+						'alt' => 'Enter a description of the image'
+					)
+				)
 			),
 			'more' => array(
-				'name'	=> 'more',
-				'title'	=> 'Here you want to end the excerpted content'
+				'name'			=> 'more',
+				'title'			=> 'Here you want to end the excerpted content',
+				'data-minibar' 	=> array(
+					'wrapTextBefore' 	=> '<!--more-->',
+					'wrapTextAfter' 	=> ''
+				)
 			),
 			'nextpage' => array(
-				'name'	=> 'nextpage',
-				'title'	=> 'Split a single post up into different web pages'
+				'name'			=> 'nextpage',
+				'title'			=> 'Split a single post up into different web pages',
+				'data-minibar' 	=> array(
+					'wrapTextBefore' 	=> '<!--nextpage-->',
+					'wrapTextAfter' 	=> ''
+				)
 			)
 		);
 		
@@ -230,42 +303,35 @@ class Smooth_Minibar {
 		$buttons_dblclick	= apply_filters( 'smooth_minibar_dblclick_buttons', 	$defaults_dblclick );
 		
 		// first buttons, view on select text
-		$minibar_buttons_select = NULL;
+		$minibar_buttons_select = '';
 		foreach ( $buttons_select as $id => $args ) {
-			if ( !isset($args['name']) )
-				$args['name'] = $id;
-			if ( ( !isset($args['title']) ) )
-					$args['title'] = '';
-			else
-				$args['title'] = ' title="' . $args['title'] . '"';
-			
-			$minibar_buttons_select .= '
-				<a href="javascript:return false;" id="' . $id . '"' . $args['title'] . ' >' . $args['name'] . '</a>' . "\n";
+			$minibar_buttons_select .= '<a 
+			href="javascript:return false;"
+			' . (isset($args['title']) ? ' title="' . $args['name'] . '"' : '') . '
+			' . (isset($args['data-minibar']) ? ' data-minibar=\''
+			 . json_encode($args['data-minibar'], JSON_FORCE_OBJECT) . '\'' : '') . '
+			>' . (isset($args['name']) ? $args['name'] : '') . '</a>' . "\n";
 		}
 		
 		// second buttons, view on double click 
-		$minibar_buttons_dblclick = NULL;
+		$minibar_buttons_dblclick = '';
 		foreach ( $buttons_dblclick as $id => $args ) {
-			if ( !isset($args['name']) )
-				$args['name'] = $id;
-			if ( ( !isset($args['title']) ) )
-					$args['title'] = '';
-			else
-				$args['title'] = ' title="' . $args['title'] . '"';
-			
-			$minibar_buttons_dblclick .= '
-				<a href="javascript:return false;" id="' . $id . '"' . $args['title'] . ' >' . $args['name'] . '</a>' . "\n";
+			$minibar_buttons_dblclick .= '<a 
+			href="javascript:return false;"
+			' . (isset($args['title']) ? ' title="' .$args['name'].'"' : '').'
+			' . (isset($args['data-minibar']) ? ' data-minibar=\'' .json_encode($args['data-minibar'],JSON_FORCE_OBJECT).'\'' : '').'
+			>' . (isset($args['name']) ? $args['name'] : '') . '</a>' . "\n";
 		}
 		
 		// get markup
-		$minibar_markup = "\n" . 
-			'<div id="smooth_minibar_menu">' .
-			$minibar_buttons_select
-			. '</div>' . 
-			"\n" . 
-			'<div id="smooth_minibar_menu_noselect">' .
-			$minibar_buttons_dblclick
-			. '</div>' . "\n";
+		$minibar_markup = "\n"
+			. '<div id="smooth_minibar_menu">'
+			. $minibar_buttons_select
+			. '</div>' . "\n"
+			. '<div id="smooth_minibar_menu_noselect">'
+			. $minibar_buttons_dblclick
+			. '</div>'
+			. "\n";
 		
 		echo $minibar_markup;
 	}
