@@ -119,11 +119,11 @@ jQuery(document).ready( function ($) {
 
 	****************************/
 	minibarMenuBoth.delegate('a','click',function(e){
-		var data = jQuery.parseJSON($(this).attr('data-minibar')),
-		wrapTextBefore = data.wrapTextBefore,
-		wrapTextAfter = data.wrapTextAfter;
+		var data 		= jQuery.parseJSON($(this).attr('data-minibar')),
+		wrapTextBefore 	= data.wrapTextBefore,
+		wrapTextAfter 	= data.wrapTextAfter;
 		
-		if (typeof data.attributes != 'undefined') for (var key in data.attributes){
+		if (typeof data.attributes != 'undefined') for (var key in data.attributes) {
 			var value = prompt(data.attributes[key],'');
 			wrapTextBefore = wrapTextBefore.replace(/(\/?>)$/,' ' + key + '="' + value + '"$1');
 		}
