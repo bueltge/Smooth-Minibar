@@ -183,7 +183,7 @@ class Smooth_Minibar {
 			),
 			'h4' => array( 
 				'name'			=> 'h4',
-				'title'			=> __( 'Heading' ),
+				'title'			=> __( 'Heading', &$this->textdomain ),
 				'data-minibar' 	=> array(
 					'wrapTextBefore'	=> '<h4>',
 					'wrapTextAfter' 	=> '</h4>'
@@ -191,7 +191,7 @@ class Smooth_Minibar {
 			),
 			'bold' => array( 
 				'name'			=> 'b',
-				'title'			=> __( 'Strong' ),
+				'title'			=> __( 'Strong', &$this->textdomain ),
 				'data-minibar' 	=> array(
 					'wrapTextBefore'	 => '<strong>',
 					'wrapTextAfter'		 => '</strong>'
@@ -199,7 +199,7 @@ class Smooth_Minibar {
 			),
 			'italic' => array(
 				'name'			=> 'i',
-				'title'			=> 'Emphasized text',
+				'title'			=> _( 'Emphasized text', &$this->textdomain ),
 				'data-minibar' 	=> array(
 					'wrapTextBefore'	 => '<em>',
 					'wrapTextAfter'		 => '</em>'
@@ -207,18 +207,18 @@ class Smooth_Minibar {
 			),
 			'link' => array(
 				'name'			=> 'a',
-				'title'			=> 'Anchor or link',
+				'title'			=> __( 'Anchor or link', &$this->textdomain ),
 				'data-minibar' 	=> array(
 					'wrapTextBefore' 	=> '<a>',
 					'wrapTextAfter'	 	=> '</a>',
 					'attributes' 		=> array(
-						'href' => __('Enter the URL of the target')
+						'href' => __( 'Enter the URL of the target', &$this->textdomain )
 					)
 				)
 			),
 			'blockquote' => array(
 				'name'			=> 'b-quote',
-				'title'			=> 'Defines a long quotation',
+				'title'			=> __( 'Defines a long quotation', &$this->textdomain ),
 				'data-minibar' 	=> array(
 					'wrapTextBefore' 	=> '<blockquote>',
 					'wrapTextAfter' 	=> '</blockquote>'
@@ -226,7 +226,7 @@ class Smooth_Minibar {
 			),
 			'cite' => array(
 				'name'			=> 'q',
-				'title'			=> 'Defines a citation',
+				'title'			=> __( 'Defines a citation', &$this->textdomain ),
 				'data-minibar' 	=> array(
 					'wrapTextBefore' 	=> '<cite>',
 					'wrapTextAfter' 	=> '</cite>'
@@ -234,7 +234,7 @@ class Smooth_Minibar {
 			),
 			'delete' => array(
 				'name'			=> 'del',
-				'title'			=> 'Defines text that has been deleted from a document, with timestamp',
+				'title'			=> __('Defines text that has been deleted from a document, with timestamp', &$this->textdomain ),
 				'data-minibar' 	=> array(
 					'wrapTextBefore' 	=> '<del datetime="' . date("YmdTh:i:s+00:00") . '">',
 					'wrapTextAfter' 	=> '</del>'
@@ -242,7 +242,7 @@ class Smooth_Minibar {
 			),
 			'insert' => array(
 				'name'			=> 'ins',
-				'title'			=> 'Defines text that has been inserted into a document, with timestamp',
+				'title'			=> __( 'Defines text that has been inserted into a document, with timestamp', &$this->textdomain ),
 				'data-minibar' 	=> array(
 					'wrapTextBefore'	 => '<ins datetime="' . date("YmdTh:i:s+00:00") . '">',
 					'wrapTextAfter'		 => '</ins>'
@@ -250,7 +250,7 @@ class Smooth_Minibar {
 			),
 			'unorderedlist' => array(
 				'name'			=> 'ul',
-				'title'			=> 'unordered list',
+				'title'			=> __( 'unordered list', &$this->textdomain ),
 				'data-minibar' 	=> array(
 					'wrapTextBefore' 	=> '<ul>' . "\r\n",
 					'wrapTextAfter' 	=> "\r\n" . '</ul>'
@@ -258,7 +258,7 @@ class Smooth_Minibar {
 			),
 			'orderedlist' => array(
 				'name'			=> 'ol',
-				'title'			=> 'ordered list',
+				'title'			=> __( 'ordered list', &$this->textdomain ),
 				'data-minibar' 	=> array(
 					'wrapTextBefore' 	=> '<ol>' . "\r\n",
 					'wrapTextAfter' 	=> "\r\n" . '</ol>'
@@ -266,7 +266,7 @@ class Smooth_Minibar {
 			),
 			'list' => array(
 				'name'			=> 'li',
-				'title'			=> 'list tag',
+				'title'			=> __( 'list tag', &$this->textdomain ),
 				'data-minibar' 	=> array(
 					'wrapTextBefore' 	=> "\r\n" . '<li>',
 					'wrapTextAfter' 	=> '</li>' . "\r\n"
@@ -274,7 +274,7 @@ class Smooth_Minibar {
 			),
 			'code' => array(
 				'name'			=> 'code',
-				'title'			=> 'code phrase tag',
+				'title'			=> __( 'code phrase tag', &$this->textdomain ),
 				'data-minibar' 	=> array(
 					'wrapTextBefore' 	=> '<code>',
 					'wrapTextAfter' 	=> '</code>'
@@ -282,7 +282,7 @@ class Smooth_Minibar {
 			),
 			'pre' => array(
 				'name'			=> 'pre',
-				'title'			=> 'preformatted text',
+				'title'			=> __( 'preformatted text', &$this->textdomain ),
 				'data-minibar' 	=> array(
 					'wrapTextBefore' 	=> "\r\n" . '<pre>',
 					'wrapTextAfter' 	=> '</pre>' . "\r\n"
@@ -293,19 +293,19 @@ class Smooth_Minibar {
 		$defaults_dblclick = array (
 			'img' => array( 
 				'name'	=> 'img',
-				'title'	=> __( 'Insert a image' ),
+				'title'	=> __( 'Insert a image', &$this->textdomain ),
 				'data-minibar' 	=> array(
 					'wrapTextBefore' => '<img />',
 					'wrapTextAfter' => '',
 					'attributes' => array(
-						'src' => 'Enter the URL of the image',
-						'alt' => 'Enter a description of the image'
+						'src' => __( 'Enter the URL of the image', &$this->textdomain ),
+						'alt' => __( 'Enter a description of the image, &$this->textdomain )'
 					)
 				)
 			),
 			'more' => array(
 				'name'			=> 'more',
-				'title'			=> 'Here you want to end the excerpted content',
+				'title'			=> __( 'Here you want to end the excerpted content', &$this->textdomain ),
 				'data-minibar' 	=> array(
 					'wrapTextBefore' 	=> '<!--more-->',
 					'wrapTextAfter' 	=> ''
@@ -313,7 +313,7 @@ class Smooth_Minibar {
 			),
 			'nextpage' => array(
 				'name'			=> 'nextpage',
-				'title'			=> 'Split a single post up into different web pages',
+				'title'			=> __( 'Split a single post up into different web pages', &$this->textdomain ),
 				'data-minibar' 	=> array(
 					'wrapTextBefore' 	=> '<!--nextpage-->',
 					'wrapTextAfter' 	=> ''
