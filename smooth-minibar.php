@@ -330,7 +330,7 @@ class Smooth_Minibar {
 		foreach ( $buttons_select as $id => $args ) {
 			$minibar_buttons_select .= '<a 
 			href="javascript:return false;"
-			' . (isset($args['title']) ? ' title="' . $args['name'] . '"' : '') . '
+			' . (isset($args['title']) ? ' title="' . $args['title'] . '"' : '') . '
 			' . (isset($args['data-minibar']) ? ' data-minibar=\''
 			 . json_encode($args['data-minibar'], JSON_FORCE_OBJECT) . '\'' : '') . '
 			>' . (isset($args['name']) ? $args['name'] : '') . '</a>' . "\n";
@@ -341,7 +341,7 @@ class Smooth_Minibar {
 		foreach ( $buttons_dblclick as $id => $args ) {
 			$minibar_buttons_dblclick .= '<a 
 			href="javascript:return false;"
-			' . (isset($args['title']) ? ' title="' . $args['name'] . '"' : '').'
+			' . (isset($args['title']) ? ' title="' . $args['title'] . '"' : '').'
 			' . (isset($args['data-minibar']) ? ' data-minibar=\'' .json_encode($args['data-minibar'],JSON_FORCE_OBJECT).'\'' : '').'
 			>' . (isset($args['name']) ? $args['name'] : '') . '</a>' . "\n";
 		}
