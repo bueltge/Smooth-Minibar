@@ -30,6 +30,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class Smooth_Minibar {
 	
+	// var for multilanguage
+	static $textdomain        = 'plugin-smooth-minibar';
+	
 	/**
 	 * constructer
 	 * 
@@ -40,10 +43,18 @@ class Smooth_Minibar {
 	 */
 	public function __construct() {
 		
+		$this->loadtextdomain();
+		
 		add_action( 'admin_enqueue_scripts',	array( $this, 'enqueue_script' ), 10, 1 );
 		add_action( 'admin_print_styles',		array( $this, 'enqueue_style' ) );
 		
 		add_action( 'admin_footer', array( $this, 'get_minibar' ) );
+	}
+	
+	public function loadtextdomain() {
+		
+		// load language file
+		load_plugin_textdomain( &$this->textdomain, FALSE, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 	}
 	
 	/**
@@ -189,7 +200,7 @@ class Smooth_Minibar {
 					'wrapTextBefore' 	=> '<a>',
 					'wrapTextAfter'	 	=> '</a>',
 					'attributes' 		=> array(
-						'href' => 'Enter the URL of the target'
+						'href' => __('Enter the URL of the target')
 					)
 				)
 			),
