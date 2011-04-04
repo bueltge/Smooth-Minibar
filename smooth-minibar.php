@@ -31,7 +31,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class Smooth_Minibar {
 	
 	// var for multilanguage
-	static $textdomain        = 'plugin-smooth-minibar';
+	static $textdomain = 'plugin-smooth-minibar';
 	
 	/**
 	 * constructer
@@ -149,7 +149,11 @@ class Smooth_Minibar {
 	public function enqueue_style() {
 		global $pagenow;
 		
-		$pages = array( 'post.php', 'post-new.php', 'comment.php', 'edit-comments.php', 'edit.php', 'edit-tags.php' );
+		$pages = array( 
+			'post.php', 'post-new.php', 
+			'comment.php', 'edit-comments.php', 
+			'edit.php', 'edit-tags.php'
+		);
 		
 		if ( in_array( $pagenow, $pages ) )
 			wp_enqueue_style( 'smooth-minibar', WP_PLUGIN_URL . '/' . dirname( plugin_basename(__FILE__) ) . '/css/style.css' );
