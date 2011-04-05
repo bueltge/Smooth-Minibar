@@ -19,99 +19,130 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes"
 
-#: smooth-minibar.php:178
-#: smooth-minibar.php:186
+#: smooth-minibar.php:181
+#: smooth-minibar.php:189
 #@ smooth-minibar
 msgid "Heading"
 msgstr "Überschrift"
 
-#: smooth-minibar.php:194
+#: smooth-minibar.php:197
 #@ smooth-minibar
 msgid "Strong"
 msgstr "Stark"
 
-#: smooth-minibar.php:202
+#: smooth-minibar.php:205
 #@ smooth-minibar
 msgid "Emphasized text"
 msgstr "Hervorgehobener Text"
 
-#: smooth-minibar.php:210
+#: smooth-minibar.php:213
 #@ smooth-minibar
 msgid "Anchor or link"
 msgstr "Anker oder Link"
 
-#: smooth-minibar.php:215
+#: smooth-minibar.php:218
 #@ smooth-minibar
 msgid "Enter the URL of the target"
 msgstr "Geben Sie die URL des Ziels ein"
 
-#: smooth-minibar.php:221
+#: smooth-minibar.php:224
 #@ smooth-minibar
 msgid "Defines a long quotation"
 msgstr "Definiert ein langes Zitat"
 
-#: smooth-minibar.php:229
+#: smooth-minibar.php:232
 #@ smooth-minibar
 msgid "Defines a citation"
 msgstr "Definiert ein Zitat"
 
-#: smooth-minibar.php:237
+#: smooth-minibar.php:240
 #@ smooth-minibar
 msgid "Defines text that has been deleted from a document, with timestamp"
 msgstr "Definiert Text, der aus einem Dokument gelöscht wurde, mit Zeitstempel"
 
-#: smooth-minibar.php:245
+#: smooth-minibar.php:248
 #@ smooth-minibar
 msgid "Defines text that has been inserted into a document, with timestamp"
 msgstr "Definiert Text der in ein Dokument eingefügt wurde, mit Zeitstempel"
 
-#: smooth-minibar.php:253
+#: smooth-minibar.php:256
 #@ smooth-minibar
 msgid "unordered list"
 msgstr "ungeordnete Liste"
 
-#: smooth-minibar.php:261
+#: smooth-minibar.php:264
 #@ smooth-minibar
 msgid "ordered list"
 msgstr "geordnete Liste"
 
-#: smooth-minibar.php:269
+#: smooth-minibar.php:272
 #@ smooth-minibar
 msgid "list tag"
 msgstr "Liste Stichworte"
 
-#: smooth-minibar.php:277
+#: smooth-minibar.php:280
 #@ smooth-minibar
 msgid "code phrase tag"
 msgstr "Code Auszeichnung"
 
-#: smooth-minibar.php:285
+#: smooth-minibar.php:288
 #@ smooth-minibar
 msgid "preformatted text"
 msgstr "vorformatierter Text"
 
-#: smooth-minibar.php:296
+#: smooth-minibar.php:299
 #@ smooth-minibar
 msgid "Insert a image"
 msgstr "Fügen Sie ein Bild ein"
 
-#: smooth-minibar.php:301
+#: smooth-minibar.php:304
 #@ smooth-minibar
 msgid "Enter the URL of the image"
 msgstr "Geben Sie die URL des Bildes ein"
 
-#: smooth-minibar.php:302
+#: smooth-minibar.php:305
 #@ smooth-minibar
 msgid "Enter a description of the image"
 msgstr "Geben Sie eine Beschreibung des Bildes ein"
 
-#: smooth-minibar.php:308
+#: smooth-minibar.php:311
 #@ smooth-minibar
 msgid "Here you want to end the excerpted content"
 msgstr "Du setzt hier das Ende für den Auszug des Inhalts"
 
-#: smooth-minibar.php:316
+#: smooth-minibar.php:319
 #@ smooth-minibar
 msgid "Split a single post up into different web pages"
 msgstr "Splitte einen einzigen Beitrag in verschiedene Web-Seiten"
+
+#. translators: plugin header field 'Name'
+#: smooth-minibar.php:0
+#@ smooth-minibar
+msgid "Smooth Minibar"
+msgstr "Smooth Minibar"
+
+#. translators: plugin header field 'PluginURI'
+#. translators: plugin header field 'AuthorURI'
+#: smooth-minibar.php:0
+#@ smooth-minibar
+msgid "http://bueltge.de/"
+msgstr ""
+
+#. translators: plugin header field 'Description'
+#: smooth-minibar.php:0
+#@ smooth-minibar
+msgid "It is a variation of a toolbar that exposes context-related functionality."
+msgstr "Eine Variation des Quickeditors, die kontextbezogene Funktionen verfügbar macht."
+
+#. translators: plugin header field 'Author'
+#: smooth-minibar.php:0
+#@ smooth-minibar
+msgid "Frank Bültge"
+msgstr ""
+
+#. translators: plugin header field 'Version'
+#: smooth-minibar.php:0
+#@ smooth-minibar
+msgid "0.0.2"
+msgstr ""
 

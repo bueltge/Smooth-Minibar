@@ -2,14 +2,18 @@
 /**
  * @package Smooth Minibar
  */
-/*
-Plugin Name: Smooth Minibar
-Plugin URI: http://bueltge.de/
-Description: 
-Version: 0.0.2
-Author: Frank Bültge
-Author URI: http://bueltge.de/
-License: GPLv2
+
+/**
+ * Plugin Name: Smooth Minibar
+ * Plugin URI: http://bueltge.de/
+ * Text Domain: plugin-smooth-minibar
+ * Domain Path: /languages
+ * Description: It is a variation of a toolbar that exposes context-related functionality.
+ * Version: 0.0.2
+ * Author: Frank Bültge
+ * Author URI: http://bueltge.de/
+ * Upgrade Check: none
+ * License: GPLv2
 */
 
 /*
@@ -32,6 +36,10 @@ class Smooth_Minibar {
 	
 	// var for multilanguage
 	public $textdomain = 'plugin-smooth-minibar';
+	// pages in backend to include js/css
+	public $editor_pages	= array( 'post.php', 'post-new.php', 'comment.php' );
+	public $comments_pages	= array( 'edit-comments.php' );
+	public $custom_pages	= array( 'edit.php', 'edit-tags.php' );
 	
 	/**
 	 * constructer
@@ -43,7 +51,7 @@ class Smooth_Minibar {
 	 */
 	public function __construct() {
 		
-		add_action( 'init', array( $this, 'load_textdomain' ) );
+		$this->localize_plugin();
 		
 		add_action( 'admin_enqueue_scripts',	array( $this, 'enqueue_script' ), 10, 1 );
 		add_action( 'admin_print_styles',		array( $this, 'enqueue_style' ) );
@@ -51,7 +59,7 @@ class Smooth_Minibar {
 		add_action( 'admin_footer', array( $this, 'get_minibar' ) );
 	}
 	
-/**
+	/**
 	 * load textfile .mo
 	 * 
 	 * @uses load_plugin_textdomain
@@ -59,10 +67,9 @@ class Smooth_Minibar {
 	 * @since 0.0.2
 	 * @return void
 	 */
-	public function load_textdomain() {
+	public function localize_plugin() {
 		
-		// load language file
-		load_plugin_textdomain( $this->textdomain, FALSE, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+		load_plugin_textdomain( $this->textdomain, FALSE, dirname( plugin_basename(__FILE__) ) . '/languages' );
 	}
 	
 	/**
@@ -82,11 +89,7 @@ class Smooth_Minibar {
 		
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '.dev' : '';
 		
-		$editor_pages	= array( 'post.php', 'post-new.php', 'comment.php' );
-		$comments_pages	= array( 'edit-comments.php' );
-		$custom_pages	= array( 'edit.php', 'edit-tags.php' );
-		
-		if ( in_array( $pagehook, $editor_pages ) ) {
+		if ( in_array( $pagehook, $this->editor_pages ) ) {
 			wp_enqueue_script( 
 				'jquery-caret', 
 				WP_PLUGIN_URL . '/' . dirname( plugin_basename(__FILE__) ) . '/js/jquery.caret.1.02' . $suffix. '.js', 
@@ -102,7 +105,7 @@ class Smooth_Minibar {
 				WP_PLUGIN_URL . '/' . dirname( plugin_basename(__FILE__) ) . '/js/script.js', 
 				array( 'jquery-caret', 'smooth-minibar-editor' )
 			);
-		} elseif ( in_array( $pagehook, $comments_pages ) ) {
+		} elseif ( in_array( $pagehook, $this->comments_pages ) ) {
 			wp_enqueue_script( 
 				'jquery-caret', 
 				WP_PLUGIN_URL . '/' . dirname( plugin_basename(__FILE__) ) . '/js/jquery.caret.1.02' . $suffix. '.js', 
@@ -118,7 +121,7 @@ class Smooth_Minibar {
 				WP_PLUGIN_URL . '/' . dirname( plugin_basename(__FILE__) ) . '/js/script.js', 
 				array( 'jquery-caret', 'smooth-minibar-editor' )
 			);
-		} elseif ( in_array( $pagehook, $custom_pages ) ) {
+		} elseif ( in_array( $pagehook, $this->custom_pages ) ) {
 			wp_enqueue_script( 
 				'jquery-caret', 
 				WP_PLUGIN_URL . '/' . dirname( plugin_basename(__FILE__) ) . '/js/jquery.caret.1.02' . $suffix. '.js', 
@@ -149,14 +152,14 @@ class Smooth_Minibar {
 	public function enqueue_style() {
 		global $pagenow;
 		
-		$pages = array( 
-			'post.php', 'post-new.php', 
-			'comment.php', 'edit-comments.php', 
-			'edit.php', 'edit-tags.php'
-		);
+		$pages = $this->editor_pages;
+		$pages = array_merge( $pages, $this->custom_pages );
+		$pages = array_merge( $pages, $this->comments_pages );
 		
-		if ( in_array( $pagenow, $pages ) )
-			wp_enqueue_style( 'smooth-minibar', WP_PLUGIN_URL . '/' . dirname( plugin_basename(__FILE__) ) . '/css/style.css' );
+		if ( ! in_array( $pagenow, $pages ) )
+			return NULL;
+		
+		wp_enqueue_style( 'smooth-minibar', WP_PLUGIN_URL . '/' . dirname( plugin_basename(__FILE__) ) . '/css/style.css' );
 	}
 	
 	/**
@@ -171,6 +174,14 @@ class Smooth_Minibar {
 	 * @return string $minibar_markup
 	 */
 	public function get_minibar() {
+		global $pagenow;
+		
+		$pages = $this->editor_pages;
+		$pages = array_merge( $pages, $this->custom_pages );
+		$pages = array_merge( $pages, $this->comments_pages );
+		
+		if ( ! in_array( $pagenow, $pages ) )
+			return NULL;
 		
 		$defaults_select = array (
 			'h3' => array( 
@@ -323,7 +334,7 @@ class Smooth_Minibar {
 		
 		// Make it filterable
 		$buttons_select		= apply_filters( 'smooth_minibar_select_buttons', 	$defaults_select );
-		$buttons_dblclick	= apply_filters( 'smooth_minibar_dblclick_buttons', 	$defaults_dblclick );
+		$buttons_dblclick	= apply_filters( 'smooth_minibar_dblclick_buttons', $defaults_dblclick );
 		
 		// first buttons, view on select text
 		$minibar_buttons_select = '';
