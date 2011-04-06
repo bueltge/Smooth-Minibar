@@ -6,7 +6,7 @@
 /**
  * Plugin Name: Smooth Minibar
  * Plugin URI: http://bueltge.de/
- * Text Domain: plugin-smooth-minibar
+ * Text Domain: smooth-minibar
  * Domain Path: /languages
  * Description: It is a variation of a toolbar that exposes context-related functionality.
  * Version: 0.0.2
@@ -17,10 +17,14 @@
 */
 
 /*
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
+License:
+=====================================================================================================
+Copyright 2011 Frank Bueltge  (email : frank@bueltge.de)
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -29,13 +33,17 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+Requirement
+=====================================================================================================
+This plugin requires WordPress >= 3.0, PHP >=5.2.8 and tested with PHP Interpreter >= 5.3.1 on WP 3.1
 */
 
 class Smooth_Minibar {
 	
 	// var for multilanguage
-	public $textdomain = 'plugin-smooth-minibar';
+	public $textdomain = 'smooth-minibar';
 	// pages in backend to include js/css
 	public $editor_pages	= array( 'post.php', 'post-new.php', 'comment.php' );
 	public $comments_pages	= array( 'edit-comments.php' );
@@ -52,11 +60,29 @@ class Smooth_Minibar {
 	public function __construct() {
 		
 		$this->localize_plugin();
+		// on activation of the plugin add cap to roles
+		register_activation_hook( __FILE__, array( $this, 'on_activate' ) );
 		
 		add_action( 'admin_enqueue_scripts',	array( $this, 'enqueue_script' ), 10, 1 );
 		add_action( 'admin_print_styles',		array( $this, 'enqueue_style' ) );
 		
+		add_action( 'init', array( $this, 'on_admin_init' ) );
 		add_action( 'admin_footer', array( $this, 'get_minibar' ) );
+	}
+	
+	/**
+	 * points the class
+	 * 
+	 * @access public
+	 * @since 0.0.2
+	 * @return void
+	 */
+	public function get_object() {
+		
+		if ( NULL === self::$classobj )
+			self::$classobj = new self;
+		
+		return self::$classobj;
 	}
 	
 	/**
@@ -70,6 +96,69 @@ class Smooth_Minibar {
 	public function localize_plugin() {
 		
 		load_plugin_textdomain( $this->textdomain, FALSE, dirname( plugin_basename(__FILE__) ) . '/languages' );
+	}
+	
+	/**
+	 * return plugin comment data
+	 * 
+	 * @since 0.0.2
+	 * @access public
+	 * @param $value string, default = 'Version'
+	 *        Name, PluginURI, Version, Description, Author, AuthorURI, TextDomain, DomainPath, Network, Title
+	 * @return string
+	 */
+	public function get_plugin_data( $value = 'Version' ) {
+		
+		$plugin_data = get_plugin_data( __FILE__ );
+		$plugin_value = $plugin_data[$value];
+		
+		return $plugin_value;
+	}
+	
+	/**
+	 * Check WP- and PHP version on activate plugin
+	 * 
+	 * @uses wp_sprintf, deactivate_plugins
+	 * @access public
+	 * @since 0.0.2
+	 * @param void
+	 * @return void
+	 */
+	public function on_activate() {
+		global $wp_version;
+		
+		// check wp version
+		if ( !version_compare( $wp_version, '3.0', '>=' ) ) {
+			deactivate_plugins( __FILE__ );
+			die( 
+				wp_sprintf( 
+					'<strong>%s:</strong> ' . 
+					__( 'Sorry, This plugin requires WordPress 3.0+', $this->textdomain )
+					, self::get_plugin_data('Name')
+				)
+			);
+		}
+		
+		// check php version
+		if ( version_compare( PHP_VERSION, '5.2.8', '<' ) ) {
+			deactivate_plugins( __FILE__ ); // Deactivate ourself
+			die( 
+				wp_sprintf(
+					'<strong>%1s:</strong> ' . 
+					__( 'Sorry, This plugin has taken a bold step in requiring PHP 5.2.8+, Your server is currently running PHP %2s, Please bug your host to upgrade to a recent version of PHP which is less bug-prone. At last count, <strong>over 80%% of WordPress installs are using PHP 5.2+</strong>.', $this->textdomain )
+					, self::get_plugin_data('Name'), PHP_VERSION 
+				)
+			);
+		}
+	}
+	
+	function on_admin_init() {
+		
+		if ( !is_admin() )
+			return NULL;
+		
+		require_once( dirname( __FILE__ ) . '/inc/settings.php' );
+		$smooth_minibar_settings = new Smooth_Minibar_Settings();
 	}
 	
 	/**

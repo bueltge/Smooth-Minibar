@@ -19,98 +19,98 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes"
 
-#: smooth-minibar.php:181
-#: smooth-minibar.php:189
+#: smooth-minibar.php:259
+#: smooth-minibar.php:267
 #@ smooth-minibar
 msgid "Heading"
 msgstr "Überschrift"
 
-#: smooth-minibar.php:197
+#: smooth-minibar.php:275
 #@ smooth-minibar
 msgid "Strong"
 msgstr "Stark"
 
-#: smooth-minibar.php:205
+#: smooth-minibar.php:283
 #@ smooth-minibar
 msgid "Emphasized text"
 msgstr "Hervorgehobener Text"
 
-#: smooth-minibar.php:213
+#: smooth-minibar.php:291
 #@ smooth-minibar
 msgid "Anchor or link"
 msgstr "Anker oder Link"
 
-#: smooth-minibar.php:218
+#: smooth-minibar.php:296
 #@ smooth-minibar
 msgid "Enter the URL of the target"
 msgstr "Geben Sie die URL des Ziels ein"
 
-#: smooth-minibar.php:224
+#: smooth-minibar.php:302
 #@ smooth-minibar
 msgid "Defines a long quotation"
 msgstr "Definiert ein langes Zitat"
 
-#: smooth-minibar.php:232
+#: smooth-minibar.php:310
 #@ smooth-minibar
 msgid "Defines a citation"
 msgstr "Definiert ein Zitat"
 
-#: smooth-minibar.php:240
+#: smooth-minibar.php:318
 #@ smooth-minibar
 msgid "Defines text that has been deleted from a document, with timestamp"
 msgstr "Definiert Text, der aus einem Dokument gelöscht wurde, mit Zeitstempel"
 
-#: smooth-minibar.php:248
+#: smooth-minibar.php:326
 #@ smooth-minibar
 msgid "Defines text that has been inserted into a document, with timestamp"
 msgstr "Definiert Text der in ein Dokument eingefügt wurde, mit Zeitstempel"
 
-#: smooth-minibar.php:256
+#: smooth-minibar.php:334
 #@ smooth-minibar
 msgid "unordered list"
 msgstr "ungeordnete Liste"
 
-#: smooth-minibar.php:264
+#: smooth-minibar.php:342
 #@ smooth-minibar
 msgid "ordered list"
 msgstr "geordnete Liste"
 
-#: smooth-minibar.php:272
+#: smooth-minibar.php:350
 #@ smooth-minibar
 msgid "list tag"
 msgstr "Liste Stichworte"
 
-#: smooth-minibar.php:280
+#: smooth-minibar.php:358
 #@ smooth-minibar
 msgid "code phrase tag"
 msgstr "Code Auszeichnung"
 
-#: smooth-minibar.php:288
+#: smooth-minibar.php:366
 #@ smooth-minibar
 msgid "preformatted text"
 msgstr "vorformatierter Text"
 
-#: smooth-minibar.php:299
+#: smooth-minibar.php:377
 #@ smooth-minibar
 msgid "Insert a image"
 msgstr "Fügen Sie ein Bild ein"
 
-#: smooth-minibar.php:304
+#: smooth-minibar.php:382
 #@ smooth-minibar
 msgid "Enter the URL of the image"
 msgstr "Geben Sie die URL des Bildes ein"
 
-#: smooth-minibar.php:305
+#: smooth-minibar.php:383
 #@ smooth-minibar
 msgid "Enter a description of the image"
 msgstr "Geben Sie eine Beschreibung des Bildes ein"
 
-#: smooth-minibar.php:311
+#: smooth-minibar.php:389
 #@ smooth-minibar
 msgid "Here you want to end the excerpted content"
 msgstr "Du setzt hier das Ende für den Auszug des Inhalts"
 
-#: smooth-minibar.php:319
+#: smooth-minibar.php:397
 #@ smooth-minibar
 msgid "Split a single post up into different web pages"
 msgstr "Splitte einen einzigen Beitrag in verschiedene Web-Seiten"
@@ -145,4 +145,15 @@ msgstr ""
 #@ smooth-minibar
 msgid "0.0.2"
 msgstr ""
+
+#: smooth-minibar.php:126
+#@ smooth-minibar
+msgid "Sorry, This plugin requires WordPress 3.0+"
+msgstr "Entschuldigung, das Plugin benötigt minimal WordPress Version 3.0"
+
+#: smooth-minibar.php:138
+#, php-format
+#@ smooth-minibar
+msgid "Sorry, This plugin has taken a bold step in requiring PHP 5.2.8+, Your server is currently running PHP %2s, Please bug your host to upgrade to a recent version of PHP which is less bug-prone. At last count, <strong>over 80%% of WordPress installs are using PHP 5.2+</strong>."
+msgstr "Entschuldigung, das Plugin hat einen mutigen Schritt getan und benötigt mindestens PHP Version 5.2.8. Dein Server ist aktuell mit Version %2s bestückt. Bitte lasse ein Update deines Servers durchführen. In der letzten Auswertung nutzten <strong>über 80%% der WordPress Installationen eine PHP Version größer 5.2</strong>."
 
