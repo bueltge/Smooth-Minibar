@@ -21,8 +21,8 @@ class Option_Table_Meta_Box {
 		$this->pagehook = 'settings_page_' . $this->textdomain . '-settings';
 		
 		add_meta_box( 
-			$this->textdomain . '-sidebox-settings',
-			__( 'Settings', $this->textdomain ),
+			$this->textdomain . '-sidebox-option',
+			__( 'Options', $this->textdomain ),
 			array( $this, 'get_table_metabox' ),
 			$this->pagehook,
 			'normal', // normal, additional
