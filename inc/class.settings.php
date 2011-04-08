@@ -58,7 +58,7 @@ class Smooth_Minibar_Settings {
 		
 		// include class for meta boxes Options
 		if ( ! class_exists('Option_Table_Meta_Box') ) {
-			require_once( dirname( __FILE__ ) . '/class.options-table-meta-box.php' );
+			require_once( dirname( __FILE__ ) . '/class.option-table-meta-box.php' );
 			$option_table_meta_box = new Option_Table_Meta_Box();
 		}
 	}
