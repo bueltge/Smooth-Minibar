@@ -51,10 +51,13 @@ class Smooth_Minibar_Settings {
 		// include style for seetings page, incl. h2-icon
 		wp_enqueue_style( $this->textdomain . '-settings', plugins_url( 'css/settings.css', __FILE__ ) );
 		
+		require_once( dirname( __FILE__ ) . '/class.about-meta-box.php' );
+		$about_meta_mox = new About_Meta_Box();
+		
 		// add side box
 		add_meta_box( 
-			$this->textdomain . '-sidebox-about',
-			__( 'About the plugin', $this->textdomain ),
+			$this->textdomain . '-sidebox-about1',
+			__( '1 About the plugin', $this->textdomain ),
 			array( $this, 'get_about_metabox' ),
 			$this->pagehook,
 			'side', // normal, additional
@@ -119,28 +122,6 @@ class Smooth_Minibar_Settings {
 		check_admin_referer( $this->textdomain . '-general' );
 		
 		wp_redirect( $_POST['_wp_http_referer'] );
-	}
-	
-	/**
-	 * below the metaboxes for settings
-	 * siede, normal, additional
-	 */
-	public function get_about_metabox($data) {
-		?>
-		<p><?php _e('Further information: Visit the <a href="http://bueltge.de">plugin homepage</a> for further information or to grab the latest version of this plugin.', $this->textdomain); ?></p>
-		<p>
-		<span style="float: left;">
-			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-			<input type="hidden" name="cmd" value="_s-xclick">
-			<input type="hidden" name="hosted_button_id" value="4578111">
-			<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="<?php _e('PayPal - The safer, easier way to pay online!', $this->textdomain); ?>">
-			<img alt="" border="0" src="https://www.paypal.com/de_DE/i/scr/pixel.gif" width="1" height="1">
-		</form>
-		</span>
-		<?php _e('You want to thank me? Visit my <a href="http://bueltge.de/wunschliste/">wishlist</a> or donate.', $this->textdomain); ?>
-		</p>
-		<p>&copy; Copyright 3/2011 - <?php echo date('m/Y'); ?> <a href="http://bueltge.de/">Frank B&uuml;ltge</a></p>
-		<?php
 	}
 	
 }
