@@ -53,16 +53,6 @@ class Smooth_Minibar_Settings {
 		// include class for meta boxes About
 		require_once( dirname( __FILE__ ) . '/class.about-meta-box.php' );
 		$about_meta_mox = new About_Meta_Box();
-		
-		// add side box
-		add_meta_box( 
-			$this->textdomain . '-sidebox-about1',
-			__( '1 About the plugin', $this->textdomain ),
-			array( $this, 'get_about_metabox' ),
-			$this->pagehook,
-			'side', // normal, additional
-			'core'
-		);
 	}
 	
 	public function get_options_page() {
