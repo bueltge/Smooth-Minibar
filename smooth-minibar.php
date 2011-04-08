@@ -48,6 +48,7 @@ class Smooth_Minibar {
 	public $editor_pages	= array( 'post.php', 'post-new.php', 'comment.php' );
 	public $comments_pages	= array( 'edit-comments.php' );
 	public $custom_pages	= array( 'edit.php', 'edit-tags.php' );
+	public $post_type		= array( 'options-general.php', 'page=smooth-minibar-settings' );
 	
 	/**
 	 * constructer
@@ -118,7 +119,7 @@ class Smooth_Minibar {
 	 * @since 0.0.2
 	 * @access public
 	 * @param $value string, default = 'Version'
-	 *        Name, PluginURI, Version, Description, Author, AuthorURI, TextDomain, DomainPath, Network, Title
+	 *		Name, PluginURI, Version, Description, Author, AuthorURI, TextDomain, DomainPath, Network, Title
 	 * @return string
 	 */
 	public function get_plugin_data( $value = 'Version' ) {
@@ -265,6 +266,46 @@ class Smooth_Minibar {
 		wp_enqueue_style( 'smooth-minibar', WP_PLUGIN_URL . '/' . dirname( plugin_basename(__FILE__) ) . '/css/style.css' );
 	}
 	
+	private function get_post_type() {
+	
+		if ( !function_exists('get_post_type_object') )
+			return NULL;
+	
+		if ( isset($_GET['post']) )
+			$post_id = (int) $_GET['post'];
+		elseif ( isset($_POST['post_ID']) )
+			$post_id = (int) $_POST['post_ID'];
+		else
+			$post_id = 0;
+	
+		$post = NULL;
+		$post_type_object = NULL;
+		$post_type = NULL;
+		if ( $post_id ) {
+			$post = get_post($post_id);
+			if ( $post ) {
+			$post_type_object = get_post_type_object($post->post_type);
+				if ( $post_type_object ) {
+					$post_type = $post->post_type;
+					$current_screen->post_type = $post->post_type;
+					$current_screen->id = $current_screen->post_type;
+				}
+			}
+		} elseif ( isset($_POST['post_type']) ) {
+			$post_type_object = get_post_type_object($_POST['post_type']);
+			if ( $post_type_object ) {
+				$post_type = $post_type_object->name;
+				$current_screen->post_type = $post_type;
+				$current_screen->id = $current_screen->post_type;
+			}
+		} elseif ( isset($_SERVER['QUERY_STRING']) ) {
+			$post_type = esc_attr( $_SERVER['QUERY_STRING'] );
+			$post_type = str_replace( 'post_type=', '', $post_type );
+		}
+	
+		return $post_type;
+	}
+	
 	/**
 	 * Echo minibar
 	 * use filter to add buttons, for buttons in the first toolbat, via mouse select, use smooth_minibar_select_buttons
@@ -280,10 +321,11 @@ class Smooth_Minibar {
 		global $pagenow;
 		
 		$pages = $this->editor_pages;
-		$pages = array_merge( $pages, $this->custom_pages );
 		$pages = array_merge( $pages, $this->comments_pages );
+		$pages = array_merge( $pages, $this->custom_pages );
+		$pages = array_merge( $pages, $this->post_type );
 		
-		if ( ! in_array( $pagenow, $pages ) )
+		if ( ! in_array( $pagenow, $pages ) && ! in_array( $this->get_post_type(), $pages ) )
 			return NULL;
 		
 		$defaults_select = array (
