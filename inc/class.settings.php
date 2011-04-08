@@ -32,7 +32,6 @@ class Smooth_Minibar_Settings {
 	
 	public function add_options_page() {
 		
-		//$menutitle  = '<span class="smooth-minibar-icon">&nbsp;</span>';
 		$menutitle = $this->smooth_minibar->get_plugin_data( 'Name' );
 		$this->pagehook = add_options_page( 
 			__( 'Smooth Minibar Settings', $this->textdomain ), 
@@ -60,8 +59,6 @@ class Smooth_Minibar_Settings {
 	
 	public function get_options_page() {
 		global $screen_layout_columns;
-		
-		$data = array('My Data 1', 'My Data 2', 'Available Data 1');
 		?>
 		<div id="<?php echo $this->textdomain; ?>-general" class="wrap">
 			<?php screen_icon( $this->textdomain . '-settings' ); ?>
