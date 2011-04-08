@@ -8,30 +8,29 @@ if (!function_exists ('add_action')) {
 
 class Smooth_Minibar_Settings {
 	
-	private $smooth_minibar;
+	protected $smooth_minibar;
 	
-	private $textdomain;
+	protected $textdomain;
 	
 	public function __construct() {
 		
 		$this->smooth_minibar = new Smooth_Minibar();
-		$this->textdomain = $this->smooth_minibar->textdomain;
+		$this->textdomain = $this->smooth_minibar->get_textdomain();
 		
-		add_filter( 'screen_layout_columns', array( $this, 'on_screen_layout_columns' ), 10, 2 );
-		add_action( 'admin_menu', array( $this, 'on_admin_menu' ) );
-		add_action( 'admin_post_save_' . $this->textdomain . '_general', array( $this, 'on_save_changes' ) );
+		add_filter( 'screen_layout_columns', array( $this, 'get_screen_layout_columns' ), 10, 2 );
+		add_action( 'admin_menu', array( $this, 'add_options_page' ) );
+		add_action( 'admin_post_save_' . $this->textdomain . '_general', array( $this, 'save_settings' ) );
 	}
 	
-	public function on_screen_layout_columns($columns, $screen) {
+	public function get_screen_layout_columns($columns, $screen) {
 		
-		if ($screen == $this->pagehook) {
+		if ( $screen == $this->pagehook )
 			$columns[$this->pagehook] = 2;
-		}
 		
 		return $columns;
 	}
 	
-	public function on_admin_menu() {
+	public function add_options_page() {
 		
 		//$menutitle  = '<span class="smooth-minibar-icon">&nbsp;</span>';
 		$menutitle = $this->smooth_minibar->get_plugin_data( 'Name' );
@@ -40,10 +39,10 @@ class Smooth_Minibar_Settings {
 			$menutitle, 
 			'manage_options',
 			$this->textdomain . '-settings', 
-			array( $this, 'on_show_page' )
+			array( $this, 'get_options_page' )
 		);
 		
-		add_action( 'load-' . $this->pagehook, array(&$this, 'on_load_page') );
+		add_action( 'load-' . $this->pagehook, array( $this, 'on_load_page' ) );
 	}
 	
 	public function on_load_page() {
@@ -52,16 +51,16 @@ class Smooth_Minibar_Settings {
 		
 		// add side box
 		add_meta_box( 
-			$this->textdomain . '-sidebox-1',
+			$this->textdomain . '-sidebox-about',
 			__( 'About the plugin', $this->textdomain ),
-			array(&$this, 'on_sidebox_1_content'),
+			array( $this, 'get_about_metabox' ),
 			$this->pagehook,
 			'side', // normal, additional
 			'core'
 		);
 	}
 	
-	public function on_show_page() {
+	public function get_options_page() {
 		global $screen_layout_columns;
 		
 		$data = array('My Data 1', 'My Data 2', 'Available Data 1');
@@ -78,15 +77,15 @@ class Smooth_Minibar_Settings {
 				<div id="poststuff" class="metabox-holder<?php echo 2 == $screen_layout_columns ? ' has-right-sidebar' : ''; ?>">
 					<div id="side-info-column" class="inner-sidebar">
 						
-						<?php do_meta_boxes($this->pagehook, 'side', $data); ?>
+						<?php do_meta_boxes( $this->pagehook, 'side', $data ); ?>
 						
 					</div>
 					<div id="post-body" class="has-sidebar">
 						<div id="post-body-content" class="has-sidebar-content">
 							
-							<?php do_meta_boxes($this->pagehook, 'normal', $data); ?>
+							<?php do_meta_boxes( $this->pagehook, 'normal', $data ); ?>
 							
-							<?php do_meta_boxes($this->pagehook, 'additional', $data); ?>
+							<?php do_meta_boxes( $this->pagehook, 'additional', $data ); ?>
 							
 							<p>
 								<input type="submit" value="Save Changes" class="button-primary" name="Submit"/>	
@@ -110,21 +109,21 @@ class Smooth_Minibar_Settings {
 		<?php
 	}
 
-	public function on_save_changes() {
+	public function save_settings() {
 		
-		if ( !current_user_can('manage_options') )
+		if ( ! current_user_can('manage_options') )
 			wp_die( __('Cheatin&#8217; uh?') );
 		
 		check_admin_referer( $this->textdomain . '-general' );
 		
-		wp_redirect($_POST['_wp_http_referer']);
+		wp_redirect( $_POST['_wp_http_referer'] );
 	}
 	
 	/**
 	 * below the metaboxes for settings
 	 * siede, normal, additional
 	 */
-	public function on_sidebox_1_content($data) {
+	public function get_about_metabox($data) {
 		?>
 		<p><?php _e('Further information: Visit the <a href="http://bueltge.de">plugin homepage</a> for further information or to grab the latest version of this plugin.', $this->textdomain); ?></p>
 		<p>

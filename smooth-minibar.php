@@ -43,7 +43,7 @@ This plugin requires WordPress >= 3.0, PHP >=5.2.8 and tested with PHP Interpret
 class Smooth_Minibar {
 	
 	// var for multilanguage
-	public $textdomain = 'smooth-minibar';
+	protected $textdomain = 'smooth-minibar';
 	// pages in backend to include js/css
 	public $editor_pages	= array( 'post.php', 'post-new.php', 'comment.php' );
 	public $comments_pages	= array( 'edit-comments.php' );
@@ -83,6 +83,20 @@ class Smooth_Minibar {
 			self::$classobj = new self;
 		
 		return self::$classobj;
+	}
+	
+	/**
+	 * return textdomain from var
+	 * use filter $this->textdomain . 'textdomain' for add filter functions
+	 * 
+	 * @uses apply_filters
+	 * @access public
+	 * @since 0.0.2
+	 * @return string $this->textdomain
+	 */
+	public function get_textdomain() {
+		
+		return apply_filters( $this->textdomain . 'textdomain', $this->textdomain );
 	}
 	
 	/**
