@@ -50,9 +50,12 @@ class Smooth_Minibar_Settings {
 		wp_enqueue_script( array('common', 'wp-lists', 'postbox') );
 		// include style for seetings page, incl. h2-icon
 		wp_enqueue_style( $this->textdomain . '-settings', plugins_url( 'css/settings.css', __FILE__ ) );
+		
 		// include class for meta boxes About
-		require_once( dirname( __FILE__ ) . '/class.about-meta-box.php' );
-		$about_meta_mox = new About_Meta_Box();
+		if ( ! class_exists('About_Meta_Box') ) {
+			require_once( dirname( __FILE__ ) . '/class.about-meta-box.php' );
+			$about_meta_mox = new About_Meta_Box();
+		}
 	}
 	
 	public function get_options_page() {
