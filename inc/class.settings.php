@@ -83,7 +83,7 @@ class Smooth_Minibar_Settings {
 							<?php do_meta_boxes( $this->pagehook, 'additional', $data ); ?>
 							
 							<p>
-								<input type="submit" value="Save Changes" class="button-primary" name="Submit"/>	
+								<input type="submit" value="Save Changes" class="button-primary" name="Submit" />
 							</p>
 						</div>
 					</div>
