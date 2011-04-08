@@ -48,6 +48,8 @@ class Smooth_Minibar_Settings {
 	public function on_load_page() {
 		
 		wp_enqueue_script( array('common', 'wp-lists', 'postbox') );
+		// include style for seetings page, incl. h2-icon
+		wp_enqueue_style( $this->textdomain . '-settings', plugins_url( 'css/settings.css', __FILE__ ) );
 		
 		// add side box
 		add_meta_box( 
