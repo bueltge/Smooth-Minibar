@@ -35,7 +35,24 @@ class Option_Table_Meta_Box {
 	 * siede, normal, additional
 	 */
 	public function get_table_metabox($data) {
-		
+		?>
+		<table class="widefat" cellspacing="0">
+		<?php
+			$style = '';
+			foreach ($importers as $id => $data) {
+				$style = ('class="alternate"' == $style || 'class="alternate active"' == $style) ? '' : 'alternate';
+				
+				if ($style != '')
+					$style = 'class="'.$style.'"';
+				echo "
+					<tr $style>
+						<td class='import-system row-title'>$action</td>
+						<td class='desc'>{$data[1]}</td>
+					</tr>";
+			}
+		?>
+		</table>
+		<?php
 	}
 	
 }
