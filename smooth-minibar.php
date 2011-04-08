@@ -437,7 +437,7 @@ class Smooth_Minibar {
 		
 		// Make it filterable
 		$buttons_select		= apply_filters( 'smooth_minibar_select_buttons', 	$defaults_select );
-		$buttons_dblclick	= apply_filters( 'smooth_minibar_dblclick_buttons', $defaults_dblclick );
+		$buttons_dblclick	= apply_filters( 'smooth_minibar_dblclick_buttons',	$defaults_dblclick );
 		
 		// first buttons, view on select text
 		$minibar_buttons_select = '';
