@@ -26,7 +26,7 @@ class About_Meta_Box {
 			array( $this, 'get_about_metabox' ),
 			$this->pagehook,
 			'side', // normal, additional
-			'core'
+			'low' // default, low, high
 		);
 	}
 	
