@@ -65,6 +65,8 @@ class Smooth_Minibar_Settings {
 	
 	public function get_options_page() {
 		global $screen_layout_columns;
+		
+		$data = '';
 		?>
 		<div id="<?php echo $this->textdomain; ?>-general" class="wrap">
 			<?php screen_icon( $this->textdomain . '-settings' ); ?>
