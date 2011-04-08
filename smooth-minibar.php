@@ -171,7 +171,7 @@ class Smooth_Minibar {
 		if ( !is_admin() )
 			return NULL;
 		
-		require_once( dirname( __FILE__ ) . '/inc/settings.php' );
+		require_once( dirname( __FILE__ ) . '/inc/class.settings.php' );
 		$smooth_minibar_settings = new Smooth_Minibar_Settings();
 	}
 	
