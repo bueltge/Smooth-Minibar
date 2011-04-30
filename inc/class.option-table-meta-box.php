@@ -33,8 +33,8 @@ class Option_Table_Meta_Box {
 	}
 	
 	public function get_smooth_minibar_dblclick_buttons($dblclick_buttons) {
-		echo 'TEST';
-		var_dump($dblclick_buttons);exit;
+		
+		return $dblclick_buttons;
 	}
 	
 	/**
@@ -45,19 +45,19 @@ class Option_Table_Meta_Box {
 		?>
 		<table class="widefat" cellspacing="0">
 		<?php
-		$importers = array( 'test' => array(1, 2, 3, 0), 'test2' => array(5, 6, 7, 9));
+			$dblclick_buttons = array( 'test' => array('data' =>1, 'title' => 2, 'data-minibar' => 3) );
 			$style = '';
-			foreach ($importers as $id => $data) {
+			foreach ($dblclick_buttons as $type => $data) {
 				$style = ('class="alternate"' == $style || 'class="alternate active"' == $style) ? '' : 'alternate';
 				
 				if ($style != '')
 					$style = 'class="' . $style . '"';
 				echo '
 					<tr ' . $style . '>
-						<td class="row-title">' . $id . '</td>
-						<td>' . $data[1] . '</td>
-						<td>' . $data[2] . '</td>
-						<td>' . $data[3] . '</td>
+						<td class="row-title">' . $type . '</td>
+						<td>' . $data['data'] . '</td>
+						<td>' . $data['title'] . '</td>
+						<td>' . $data['data-minibar'] . '</td>
 					</tr>';
 			}
 		?>

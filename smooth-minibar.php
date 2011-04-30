@@ -9,7 +9,7 @@
  * Text Domain: smooth-minibar
  * Domain Path: /languages
  * Description: It is a variation of a toolbar that exposes context-related functionality.
- * Version: 0.0.2
+ * Version: 0.2.0
  * Author: Frank Bültge
  * Author URI: http://bueltge.de/
  * Upgrade Check: none
