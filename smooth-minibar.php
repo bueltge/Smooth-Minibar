@@ -6,7 +6,7 @@
 Plugin Name: Smooth Minibar
 Plugin URI: http://bueltge.de/
 Description: It is a variation of a toolbar that exposes context-related functionality.
-Version: 0.0.1
+Version: 0.1.0
 Author: Frank Bültge
 Author URI: http://bueltge.de/
 License: GPLv2
