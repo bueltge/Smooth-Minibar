@@ -19,6 +19,10 @@ jQuery(document).ready( function ($) {
 		
 		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
 	});
+	// hide on keydown
+	$(element +', body').keydown(function() {
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
+	})
 	// first minibar menu
 	$(element).select(function() {
 		// get the mouse position an show the menu
