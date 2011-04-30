@@ -1,153 +1,151 @@
 jQuery(document).ready( function ($) {
 
-	var current_element 	= $(element),
-	minibarFadeouttime 		= 200, // in ms
-	minibarFadeintime 		= 500, // in ms
-	minibarMenu 			= $("#smooth_minibar_menu"),
-	minibarMenuNoSelect 	= $("#smooth_minibar_menu_noselect"),
-	minibarMenuBoth 		= $("#smooth_minibar_menu, #smooth_minibar_menu_noselect"),
-	$minibarCaretTextarea 	= $('<textarea/>'),
-	$minibarCaretDiv 		= $('<div/>'),
-	$minibarCaretSpan 		= $('<span/>');
-	console.log(current_element);
+	var mouseX = 0;
+	var mouseY = 0;
 	
-	// caret pixel calculation helper
-	$('body').append($minibarCaretTextarea).append($minibarCaretDiv).append($minibarCaretSpan);
+	var fadeouttime = 200; //in millisecond(ms); 1000ms = 1second
+	var fadeintime  = 500; // in ms
 	
-	$minibarCaretTextarea.css({
-		'position':'absolute',
-		'left':'-9999px',
-		'overflow-y':'scroll',
-		'width':current_element.width(),
-		'height':'1em',
-		'font':current_element.css('font')
+	var now = now || new Date(),
+		datetime = ISODateString(now);
+	
+	$(element).mousemove(function(e) {
+		// track mouse position
+		mouseX = e.pageX;
+		mouseY = e.pageY;
 	});
-	
-	$minibarCaretDiv.css({
-		'display':'none',
-		// 4 debugging
-		'position':'fixed',
-		'top':'0px',
-		'left':'0px',
-		'background-color':'blue',
-		'width':current_element.width(),
-		'overflow-y':'scroll',
-		'padding':current_element.css('padding'),
-		'font':current_element.css('font')
-	}).text('a');
-	
-	$minibarCaretSpan.css({
-		'display':'none',
-		// 4 debugging
-		'position':'fixed',
-		'bottom':'30px',
-		'left':'0px',
-		'background-color':'red',
-		'font':current_element.css('font')
-	 });
-
 	// hide on mousedown
-	current_element.bind('scroll mousedown',function() {
-		minibarMenuBoth.fadeOut(minibarFadeouttime);
+	$(element +', body').mousedown(function() {
+		
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
 	});
-	
 	// first minibar menu
-	current_element.select(function() {
-		var before = $(this).val().substring(0,$(this).caret().start),
-		minibarCaretDivHeight 	= $minibarCaretDiv.val('a').height(),
-		minibarCaretDivContent 	= '',
-		minibarCaretDivHTML 	= '',
-		beforeLines 			= before.split('\n'),
-		beforeWords 			= beforeLines[beforeLines.length - 1].replace(/\-/gi,' ').split(' ');
-		beforeLines.pop();
-		
-		var beforeRemove 		= beforeLines.join('\n');
-		
-		for (i=0;i<beforeWords.length;i++) {
-			minibarCaretDivHTML = (
-				minibarCaretDivContent + ' ' + beforeWords[i]).replace(/[\r\n]/gi,
-				'<br />'
-			);
-			$minibarCaretDiv.html(minibarCaretDivHTML);
-			if ($minibarCaretDiv.height() > minibarCaretDivHeight) {
-				beforeRemove += minibarCaretDivContent + ' ';
-				minibarCaretDivContent = beforeWords[i];
-			} else {
-				minibarCaretDivContent += ' ' + beforeWords[i];
-			}
-		}
-		
-		var beforeLast = before.substring(beforeRemove.length);
-		console.log(beforeRemove);
-		$minibarCaretTextarea.val(before).scrollTop(10000);
-		$minibarCaretSpan.text(beforeLast);
-		
-		var top = Math.max(
-			current_element.offset().top,
-			current_element.offset().top + (
-				$minibarCaretTextarea.scrollTop() - current_element.scrollTop()
-			)
-		),
-		left = current_element.offset().left + $minibarCaretSpan.width();
-		minibarMenu.css({
-			"top": top - 50,
-			"left": left + 5
-		}).fadeIn(minibarFadeintime);
+	$(element).select(function() {
+		// get the mouse position an show the menu
+		$("#smooth_minibar_menu").css("top", mouseY - 30).css("left", mouseX + 10).fadeIn(fadeintime);
 	});
-	
 	// second minibar menu
-	current_element.dblclick(function(e) {
-		minibarMenuNoSelect.css({
-			"top": e.pageY + 10,
-			"left": e.pageX
-		}).fadeIn(minibarFadeintime);
+	$(element).dblclick(function() {
+		// get the mouse position an show the menu
+		$("#smooth_minibar_menu_noselect").css("top", mouseY + 5).css("left", mouseX).fadeIn(fadeintime);
 	});
 	
-	/****************************
-	Aktionen werden über HTML5 data-Attribut am Knopf definiert.
-	Markup Varianten:
+	$("#h3").click(function() {
+		wrapText("<h3>", "</h3>");
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
+	});
 	
-	<a href="javascript:return false;" 
-	data-minibar='{"wrapTextBefore":"<h3>","wrapTextAfter":"</h3>"}' 
-	title="Heading">h3</a> 
+	$("#h4").click(function() {
+		wrapText("<h4>", "</h4>");
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
+	});
+	
+	$("#bold").click(function() {
+		wrapText("<strong>", "</strong>");
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
+	});
 
-	oder
+	$("#italic").click(function() {
+		wrapText("<em>", "</em>");
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
+	});
 
-	<a href="javascript:return false;" 
-	data-minibar='{"wrapTextBefore":"<img \/>","wrapTextAfter":"","attributes":{"src":"Enter the URL of the image","alt":"Enter a description of the image"}}' 
-	title="Image">img</a> 
+	$("#link").click(function() {
+		var url = prompt("Enter URL", "http://");
+		if (url != null)
+			wrapText('<a href="' + url + '">', '</a>');
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
+	});
 
-	****************************/
-	minibarMenuBoth.delegate('a','click',function(e){
-		var data 		= jQuery.parseJSON($(this).attr('data-minibar')),
-		wrapTextBefore 	= data.wrapTextBefore,
-		wrapTextAfter 	= data.wrapTextAfter;
-		
-		if (typeof data.attributes != 'undefined') for (var key in data.attributes) {
-			var value = prompt(data.attributes[key],'');
-			wrapTextBefore = wrapTextBefore.replace(/(\/?>)$/,' ' + key + '="' + value + '"$1');
-		}
-		
-		wrapText(wrapTextBefore, wrapTextAfter);
-		minibarMenuBoth.fadeOut(minibarFadeouttime);
-		e.preventDefault();
-	})
+	$("#blockquote").click(function() {
+		wrapText("<blockquote>", "</blockquote>");
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
+	});
+	
+	$("#cite").click(function() {
+		wrapText("<cite>", "</cite>");
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
+	});
+	
+	$("#delete").click(function() {
+		wrapText('<del datetime="' + datetime + '">', '</del>');
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
+	});
+
+	$("#insert").click(function() {
+		wrapText('<ins datetime="' + datetime + '">', '</ins>');
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
+	});
+	
+	$("#unorderedlist").click(function() {
+		wrapText("<ul>\n", "\n</ul>");
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
+	});
+	
+	$("#orderedlist").click(function() {
+		wrapText("<ol>\n", "\n</ol>");
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
+	});
+	
+	$("#list").click(function() {
+		wrapText("\n<li>", "</li>\n");
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
+	});
+	
+	$("#code").click(function() {
+		wrapText("<code>", "</code>");
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
+	});
+	
+	$("#pre").click(function() {
+		wrapText("\n<pre>", "</pre>\n");
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
+	});
+	
+	// elements of second bar via dblclick
+	$("#img").click(function() {
+		var url = prompt("Enter the URL of the image", "http://");
+		var alt = prompt("Enter a description of the image", "");
+		if (alt != '' && alt != null)
+			alt = ' alt="' + alt + '"';
+		if (url != '' && url != null)
+			wrapText('<img src="' + url + '"' + alt + ' />', '');
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
+	});
+	
+	$("#more").click(function() {
+		wrapText("<!--more-->", "");
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
+	});
+	
+	$("#nextpage").click(function() {
+		wrapText("<!--nextpage-->", "");
+		$("#smooth_minibar_menu, #smooth_minibar_menu_noselect").fadeOut(fadeouttime);
+	});
 	
 	function wrapText(startText, endText){
 		// Get the text before the selection
-		var before = current_element.val().substring(
-			0,
-			current_element.caret().start
-		);
+		var before = $(element).val().substring( 0, $(element).caret().start );
+		
 		// Get the text after the selection
-		var after = current_element.val().substring(
-			current_element.caret().end,
-			current_element.val().length
-		);
+		var after = $(element).val().substring( $(element).caret().end, $(element).val().length );
+		
 		// merge text before the selection, a selection wrapped with inserted text and a text after the selection
-		current_element.val(
-			before + startText + current_element.caret().text + endText + after
-		);
+		$(element).val( before + startText + $(element).caret().text + endText + after );
 	}
 	
+	// Inspiriert von https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Date#Methods
+	function ISODateString(d) {
+		
+		function pad(n) {
+			return n<10 ? '0'+n : n
+		}
+		
+		return d.getUTCFullYear()+'-'
+		+ pad(d.getUTCMonth()+1)+'-'
+		+ pad(d.getUTCDate())+'T'
+		+ pad(d.getUTCHours())+':'
+		+ pad(d.getUTCMinutes())+':'
+		+ pad(d.getUTCSeconds())+'+00:00'
+	}
 });
