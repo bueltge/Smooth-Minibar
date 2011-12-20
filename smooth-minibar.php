@@ -1,16 +1,13 @@
 <?php
 /**
- * @package Smooth Minibar
+ * Plugin Name: Smooth Minibar
+ * Plugin URI:  https://github.com/bueltge/Smooth-Minibar
+ * Description: It is a variation of a toolbar that exposes context-related functionality.
+ * Version:     0.1.2
+ * Author:      Frank Bültge
+ * Author URI:  http://bueltge.de/
+ * License:     GPLv3
  */
-/*
-Plugin Name: Smooth Minibar
-Plugin URI: http://bueltge.de/
-Description: It is a variation of a toolbar that exposes context-related functionality.
-Version: 0.1.1
-Author: Frank Bültge
-Author URI: http://bueltge.de/
-License: GPLv2
-*/
 
 /*
 This program is free software; you can redistribute it and/or
@@ -40,11 +37,10 @@ class Smooth_Minibar {
 	 */
 	public function __construct() {
 		
-		add_action( 'admin_enqueue_scripts',	array( $this, 'enqueue_script' ), 10, 1 );
-		add_action( 'admin_print_styles',		array( $this, 'enqueue_style' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_script' ), 10, 1 );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_style' ) );
 		
 		add_action( 'admin_footer', array( $this, 'get_minibar' ) );
-		
 	}
 	
 	/**
@@ -279,4 +275,3 @@ if ( function_exists('add_action') && class_exists('Smooth_Minibar') ) {
 	header('HTTP/1.1 403 Forbidden');
 	exit();
 }
-?>
